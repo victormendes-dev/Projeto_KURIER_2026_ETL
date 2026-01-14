@@ -5,8 +5,8 @@ from loguru import logger
 # Imports locais:
 from database.conn_POSTGRES.conn_postgres     import Connect_PgAdmin
 from inicializacao.extrair_dados              import retornarDados
-from guardar_dados.salvar_dados               import Salvar_Dados
-from models.tratar_dados                      import Tratamento
+from guardar_dados.tratar_dados               import Tratamento
+from models.padronizar_dados                      import Padronizar
 from processamento.Processamento_dados        import Processamento
 
 
@@ -27,18 +27,18 @@ try:
         # Organizado dessa forma tendo em vista a ideia de filas. O arquivo já é retornado e é preparado para ser tratado e inserido.
         for nomeArquivo, json in var_jsonDadosKurier.items():
 
-            # Iniciar a classe responsavel por guardar o arquivo no repositorio:
-            var_objSalvarDados = Salvar_Dados(json, nomeArquivo)
+            # Iniciar a classe responsavel por Tratar os dados:
+            var_objSalvarDados = Tratamento(json, nomeArquivo)
 
-            # Função responsavel por salvar o arquivo no repositorio:
+            # Função responsavel por salvar o arquivo no repositorio e por tratar os dados:
             var_dfDadosETL = var_objSalvarDados.dados_Excel()
 
-            # Instanciando a classe relacionada ao Tratamento dos dados:
-            var_objTratamento = Tratamento(var_dfDadosETL, nomeArquivo)
+            # Instanciando a classe relacionada a Padronização dos dados:
+            var_objTratamento = Padronizar(var_dfDadosETL, nomeArquivo)
 
-            # Tratamento dos dados:
-            var_dbDados = var_objTratamento.tratamento_de_dados()
-
+            # Padronizar os dados:
+            var_dbDados = var_objTratamento.padronizar_dados()
+ 
             try:
                 # Iniciando conexão com o cursor do banco:
                 var_objConexaoBanco = var_objConexao.connect_postgres('projeto_Kurier')

@@ -6,7 +6,7 @@ import ast
 from variaveis_globais.variaveis  import var_strCaminhoRepositorio, var_DateHoje
 
 
-class Salvar_Dados:
+class Tratamento:
     def __init__(self, json: json, nomeArquivo: str):
         self.json = json
         self.nomeArquivo = nomeArquivo

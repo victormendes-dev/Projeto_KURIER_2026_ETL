@@ -1,14 +1,14 @@
 import pandas as pd
-from datetime import date
-from loguru import logger
-from models.models import Models
+from datetime       import date
+from loguru         import logger
+from models.models  import Models
 
-class Tratamento:
+class Padronizar:
     def __init__(self,var_dfDadosETL: pd.DataFrame, nomeArquivo):
             self.var_dfDadosETL = var_dfDadosETL
             self.nomeArquivo    = nomeArquivo
                 
-    def tratamento_de_dados(self):
+    def padronizar_dados(self):
             """
             Trata todos os dados retornados via API
             return: Retorna uma lista com os dados tratados prontos para serem inseridos em banco
