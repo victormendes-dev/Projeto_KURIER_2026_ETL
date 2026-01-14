@@ -121,3 +121,7 @@ Ao final do processo, os dados estarão:
 - Tratados e padronizados
 - Armazenados em PostgreSQL
 - Prontos para análise e visualização em ferramentas de BI, como o Power BI
+
+📄 Outros Arquivos
+- requirements.txt: dependências do projeto
+- .gitignore: controle de versionamento
