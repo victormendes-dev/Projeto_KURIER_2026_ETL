@@ -16,32 +16,32 @@ A solução foi organizada em módulos bem definidos, seguindo o fluxo natural d
 src/
   Diretório principal do projeto, onde está concentrada toda a lógica do ETL.
 
-inicializacao/
+inicializacao/ extrair_dados.py
 - Responsável pelo início do processo de ETL.
 - Contém os scripts que realizam:
 - Requisições à API Local
 - Recuperação dos arquivos JSON (leads, clientes, vendas)
 - Representa a etapa Extract do ETL.
 
-models/
+models/ padronizar_dados.py
 - Camada responsável pela padronização e modelagem dos dados.
 - Define a estrutura das entidades do projeto por meio de classes.
 - Garante consistência de tipos, ordem dos campos e organização dos dados antes da carga.
 - Exemplo: modelagem da entidade LEADS, encapsulando atributos e método de conversão (to_tuple) para facilitar a inserção no banco.
 - Essa camada representa a base da etapa Transform, assegurando que os dados sigam um padrão único em todo o pipeline.
 
-guardar_dados/
-- Responsável por persistir os dados transformados.
+guardar_dados / tratar_dados.py
+- Responsável por tratar os dados transformados.
 - Converte os arquivos JSON em CSV
 - Cria uma camada intermediária de auditoria e rastreabilidade
 - Os CSVs gerados são posteriormente utilizados na carga para o banco de dados.
 
-repositorio/
+repositorio/ 
 - Diretório onde ficam armazenados os arquivos CSV padronizados.
 - Representa a área de staging do ETL
 - Os arquivos presentes neste diretório são os que efetivamente serão inseridos no banco de dados.
 
-processamento/
+processamento/ Processamento_dados.py
 - Camada responsável pela inserção dos dados no banco de dados.
 - Lê os arquivos CSV do repositório
 - Cria a fila de inserção
@@ -54,7 +54,7 @@ database/
 - Configurações de acesso (host, usuário, senha, database)
 - Funções auxiliares para comunicação com o PostgreSQL
 
-variaveis_globais/
+variaveis_globais/ variaveis.py
 - Contém variáveis utilizadas em todo o escopo do projeto.
 - Constantes
 - Parâmetros globais
