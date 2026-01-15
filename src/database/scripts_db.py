@@ -90,3 +90,16 @@ CREATE_TABLE_VENDAS = '''
     , extra_notes         text
     );
 '''
+
+CREATE_VIEW_VENDAS = '''
+  CREATE VIEW VW_VENDAS_LEADS AS
+  SELECT
+      VEN.*,
+      COALESCE(
+          NULLIF(CLI.ORIGIN_LEAD_ID, 'NaN'),
+          'L' || LPAD(SPLIT_PART(CLI.NAME_LEAD, ' ', 2), 3, '0')
+      ) AS teste
+  FROM public.projeto_kurier_vendas VEN
+  JOIN public.projeto_kurier_clientes CLI
+    ON VEN.client_id = CLI.client_id;
+'''
